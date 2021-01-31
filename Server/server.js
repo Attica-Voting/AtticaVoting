@@ -1,15 +1,9 @@
-/* include express.js & socket.io */
 const express = require("express");
 const app = express();
 const http = require("http");
-//const io = require("socket.io")(http);
-//const https = require("https");
-const socket = require("socket.io");
-//const cors = require("cors");
 
 /* include other packages */
 const inquirer = require("inquirer");
-const open = require("open");
 const TextDecoder = require("text-encoding").TextDecoder;
 const fs = require("fs");
 const rp = require('request-promise');
@@ -154,7 +148,6 @@ function configureServer() {
     app.use(express.static("Server/public/images/"));
 
     webServer = http.createServer(app);
-    io = socket.listen(webServer);
 
     API.map(({path, callback}) => app.post('/api' + path, callback));
 
