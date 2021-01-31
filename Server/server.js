@@ -25,24 +25,19 @@ const utils = require('./utils.js');
 const initQuestions = utils.initQuestions;
 const connQuestions = utils.connectQuestions;
 const UInt8ToString = utils.UInt8ToString;
-const secondsToDate = utils.secondsToDate;
 const log = utils.handleLog;
 const sleep = utils.sleep;
-const convert = (from, to) => str => Buffer.from(str, from).toString(to);
-const hexToStr = convert('hex', 'utf8');
+// const convert = (from, to) => str => Buffer.from(str, from).toString(to);
 
 /* config */
-const config = require('./config/config.js');
-const hederaConfig = config.hederaConfig;
-const tallyConfig = config.dragonGlassConfig;
+// const config = require('./config/config.js');
+// const hederaConfig = config.hederaConfig;
+// const tallyConfig = config.dragonGlassConfig;
 
 const newElectionConfig = require('./config/electionConfig.json');
 
 /* security */
 const security = require("./security.js");
-
-const routing = require('./routing');
-
 const API = require('./api/RESTfulAPI');
 
 /* init variables */
@@ -156,7 +151,7 @@ function configureServer() {
 
 function loadUidList(fileName) {
     let data = fs.readFileSync(fileName, 'utf8');
-    temp = data.split('\n');
+    let temp = data.split('\n');
     for(let i=0; i < temp.length; i++){
         uidList[0][i] = temp[i].split(',')[0];
         uidList[1][i] = temp[i].split(',')[1];
@@ -208,7 +203,7 @@ configured TopicID
  */
 async function sendHCSMessage(msg) {
     try {
-        new ConsensusSubmitMessageTransaction()
+        await ConsensusSubmitMessageTransaction()
             .setTopicId(topicId)
             .setMessage(msg)
             .execute(HederaClient);
@@ -249,8 +244,7 @@ function subscribeToMirror() {
 }
 
 function formatConfirmationMessage(encMsg, seqNum, runningHash){
-    let retStr = `${topicId}~${seqNum}~${encMsg}~${runningHash}`;
-    return retStr;
+    return `${topicId}~${seqNum}~${encMsg}~${runningHash}`;
 }
 
 /*
@@ -343,7 +337,6 @@ async function createTopic() {
         );
         log("createTopic()", `New Topic Created, ID = ${topicId}`, logStatus);
         await sleep(9000);
-        return;
     } catch (error) {
         log("ERROR: createTopic() failed", error, logStatus);
         process.exit(1);
