@@ -13,8 +13,8 @@ const LoginLayout = props =>
                         container justifyContent={"center"} alignContent={"center"} alignItems={"center"}
                         style={{height: props.width < 500 ? "95vh" : "92vh"}}
                     >
-                        <Grid item xs={12} sm={12} md={5}>
-                            <Paper elevation={8} style={{height: '80vh', position: "relative"}}>
+                        <Grid item xs={8} >
+                            <Paper elevation={8} style={{height: '90vh', position: "relative"}}>
                                 <Grid
                                     container justifyContent={"center"} alignContent={"center"} alignItems={"center"}
                                     style={{height: "100%"}}
