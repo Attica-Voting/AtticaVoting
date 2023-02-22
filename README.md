@@ -39,18 +39,11 @@ Our project provides consensus validation for every vote casts and administratio
 ### Setup
 - Install node dependencies with `npm install`
 
-- Make a copy or rename `config.js.example` to `config.js` in the root of the project directory
-
-- Configure `electionConfig.js` with the election start and end time, and the candidate information
-
-- (optional) Fill out `config.js` with your Hedera operator ID and private key for quick startup
-
 ### Starting an Election 
-
-- Run the script `npm run bundle`
 
 - Start the script with `npm run start`
 
+- Once you get to the 404 page add `/elections/dogs` or `elections/CSU` to the URL
 
 ### Finishing an Election
 
