@@ -7,7 +7,6 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import TypeWriterEffect from 'react-typewriter-effect';
 
 function Confirmation(props) {
-
     return (
         <>
             <Navigation {...props}/>

@@ -28,8 +28,8 @@ function CandidateCard(props) {
         <Box style={{position: "relative"}}>
             <Box width={275} height={350} border={props.checked ? 2 : undefined}
                   className={props.checked ? undefined : classes.candidateCard}
-                boxShadow={props.checked ? 3 : undefined}>
-                    <CardMedia image={props.image} title={props.candidate.name} classes={mediaStyles}
+                  boxShadow={props.checked ? 3 : undefined} id={props.candidate.name+'card'}>
+                <CardMedia image={props.image} title={props.candidate.name} classes={mediaStyles}
                         style={{height: 300, width:'100%'}} onClick={() => handleSelectedCandidate()}/>
                 <Grid container direction='column' justifyContent={'center'} alignItems='center'>
                     {props.category === 'president' ? 

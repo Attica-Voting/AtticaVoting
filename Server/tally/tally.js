@@ -9,7 +9,7 @@ async function main(){
     await client.connect();
 
     let hClient = new HederaClass(process.env.ACCOUNT_ID, process.env.PRIVATE_KEY, process.env.NODE_ENV === 'development' ? "default" : "debug");
-    let election = await client.db('Attica').collection('Election').findOne({'title': "CSU"});
+    let election = await client.db('Attica').collection('Election').findOne({'title': "dogs"});
     let topicID = election.topicID;
 
     let ballots = await hClient.pullHCSMessages(topicID);
