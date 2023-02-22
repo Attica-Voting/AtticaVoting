@@ -14,10 +14,12 @@ import ScrollToButton from "../utils/ScrollToButton";
 import SubmitButton from "../utils/SubmitButton";
 import CountdownTimer from "../utils/CountdownTimer";
 import Race from "./Race";
+import {weighted_random} from '../pages/scripts/VotingScript'
 
 function Election(props) {
   const [votingStep, setVotingStep] = useState(0);
   const [success, setSuccess] = useState();
+ 
 
   if (votingStep === 0) {
     return <Voting setSuccess={setSuccess} setVotingStep={setVotingStep}/>
@@ -27,6 +29,7 @@ function Election(props) {
   }
 
 }
+
 
 function Voting(props) {
   const { topicId } = useParams();
@@ -43,6 +46,13 @@ function Voting(props) {
     onCompleted({submitVote}) {
       if (submitVote) {
         console.log('vote submitted')
+
+        const end = Math.floor(Date.now() / 1000)
+        //console.log('begin', begin)
+        //console.log('end', end)
+        const totalTime = end - begin
+        console.log('Total time:',totalTime)
+
         props.setSuccess(submitVote.success)
         props.setVotingStep(2)
       }
@@ -52,21 +62,42 @@ function Voting(props) {
   if (error) return `Error! ${error.message}`;
   if (loading) return <Skeleton variant="rect" width={"100%"} height={"100%"}/>;
 
+  //Run the simmulation
+  //runScript()
+  let begin
+  
+  function runScript() {
+    begin = Math.floor(Date.now() / 1000)
+    for (let i = 0; i < 5; i+=1) {
+      const electionID = data.electionLookup._id
+ 
+      const items = ['Arlo', 'Sassy', 'Razmataz', 'Banzai', 'Ranger']
+      const win = weighted_random(items)
+
+      const winnerArray = [{
+        winners: win //[winner[index]]
+      }]
+      
+      props.setVotingStep(1)
+      submitVote({variables: {electionID: electionID, winners: winnerArray, timeStamp: Date.now()}})
+    }
+  }
+
   function createSubmitItems() {
+    begin = Math.floor(Date.now() / 1000)
     const electionID = data.electionLookup._id
     for (const winner in winners) {
       const raceObj = {
-        raceName: winner,
-        ballotType: data.electionLookup.races.find((race) => race.title === winner).ballotType,
+        //raceName: winner,
+        //ballotType: data.electionLookup.races.find((race) => race.title === winner).ballotType,
         winners: [winners[winner]]
       }
       winnerArray.push(raceObj)
     }
-    //console.log(winnerArray)
-    props.setVotingStep(1)
-    submitVote({variables: {electionID: electionID, winners: winnerArray}})
-  }
 
+    props.setVotingStep(1)
+    submitVote({variables: {electionID: electionID, winners: winnerArray, timeStamp: Date.now()}})
+  }
 
   return (
     <>
@@ -126,5 +157,8 @@ function HeaderBar(props) {
     </Grid>
   );
 }
+
+
+
 
 export default Election;

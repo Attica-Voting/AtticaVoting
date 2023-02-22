@@ -28,19 +28,19 @@ export default class HederaClass {
     configured TopicID
     -------------------------------------------------------------------------
     */
-    async sendHCSMessage(msg, topicID) {
-        try {
-            await new TopicMessageSubmitTransaction({
-                topicId: topicID,
-                message: msg
-            }).execute(this.HederaClient);
+    // async sendHCSMessage(msg, topicID) {
+    //     try {
+    //         await new TopicMessageSubmitTransaction({
+    //             topicId: topicID,
+    //             message: msg
+    //         }).execute(this.HederaClient);
 
-            console.log("ConsensusSubmitMessageTransaction() ", msg);
-        } catch (error) {
-            console.log("ERROR: ConsensusSubmitMessageTransaction() ", error);
-            process.exit(1);
-        }
-    }
+    //         console.log("ConsensusSubmitMessageTransaction() ", msg);
+    //     } catch (error) {
+    //         console.log("ERROR: ConsensusSubmitMessageTransaction() ", error);
+    //         process.exit(1);
+    //     }
+    // }
 
     async pullHCSMessages(topicID){
         let ballots = [];
