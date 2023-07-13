@@ -33,7 +33,7 @@
     "@devexpress/dx-react-chart": "^2.7.6",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@hashgraph/sdk": "^2.0.24",
+    "@hashgraph/sdk": "^2.29.0",
     "@leanup/cli": "^1.1.21",
     "@leanup/cli-preact": "^1.1.21",
     "@leanup/form": "1.1.21",
